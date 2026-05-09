@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Emergency Chat — SHEild AI in-app messaging with your emergency contacts.">
+    <title>Emergency Chat — SHEild AI</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="gradient-bg"></div>
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="container header-inner">
+            <a href="dashboard.html" class="logo">
+                <div class="logo-icon">🛡️</div>
+                <span>SHE<span class="text-gradient">ild</span></span>
+            </a>
+            <div class="header-actions">
+                <a href="dashboard.html" class="btn btn-ghost btn-sm">← Dashboard</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-shell">
+        <div class="container">
+            <div class="page-title">
+                <h1>💬 Emergency Chat</h1>
+                <p>Send messages to your emergency contacts — all within this app.</p>
+            </div>
+
+            <!-- Contact Tabs -->
+            <div class="chat-contact-tabs" id="contact-tabs">
+                <button class="chat-tab active" data-contact="all" onclick="switchChatContact('all', this)">
+                    📢 All
+                </button>
+                <!-- Contact tabs populated by JS -->
+            </div>
+
+            <!-- Chat Window -->
+            <div class="chat-window" id="chat-window">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="chat-empty" id="chat-empty">
+                        <div style="font-size: 3rem; margin-bottom: var(--space-md);">💬</div>
+                        <h3>Start a Conversation</h3>
+                        <p>Type a message or use the quick actions below.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Reply Buttons -->
+            <div class="quick-replies" id="quick-replies">
+                <button class="quick-reply-btn" onclick="quickSend('🆘 I need help! Please come to my location immediately!')">
+                    🆘 Send Help
+                </button>
+                <button class="quick-reply-btn" onclick="quickSend('✅ I am safe now. Thank you for checking on me.')">
+                    ✅ I'm Safe
+                </button>
+                <button class="quick-reply-btn" onclick="quickSend('📞 Please call me now, it\'s urgent!')">
+                    📞 Call Me
+                </button>
+                <button class="quick-reply-btn" onclick="quickSend('⚠️ I feel unsafe. Stay alert for my messages.')">
+                    ⚠️ Unsafe
+                </button>
+                <button class="quick-reply-btn" onclick="sendLocationMessage()">
+                    📍 Send Location
+                </button>
+                <button class="quick-reply-btn" onclick="startChatAudioRecording()">
+                    🎤 Record Audio
+                </button>
+            </div>
+
+            <!-- Chat Input -->
+            <div class="chat-input-bar glass-card-static">
+                <button class="chat-attach-btn" onclick="sendLocationMessage()" title="Attach Location">
+                    📍
+                </button>
+                <input type="text" id="chat-message-input" class="chat-input" placeholder="Type a message..."
+                    maxlength="500" onkeypress="if(event.key==='Enter') sendInAppMessage()">
+                <button class="chat-send-btn" onclick="sendInAppMessage()" title="Send">
+                    ➤
+                </button>
+            </div>
+
+            <!-- Audio Recording UI (inline) -->
+            <div class="chat-audio-bar glass-card-static" id="chat-audio-bar" style="display:none;">
+                <div class="audio-rec-indicator">
+                    <span class="rec-dot-small"></span>
+                    <span id="chat-audio-label">Recording...</span>
+                </div>
+                <span class="audio-timer" id="chat-audio-timer">00:00</span>
+                <button class="btn btn-danger btn-sm" onclick="stopAndSendAudio()">⏹ Stop & Send</button>
+                <button class="btn btn-ghost btn-sm" onclick="cancelAudioRecording()">✕</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>

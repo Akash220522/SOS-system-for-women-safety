@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Live Location Tracking — SHEild AI Safety Platform.">
+    <title>Live Location — SHEild AI</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="gradient-bg"></div>
+
+    <!-- Header -->
+    <header class="app-header">
+        <div class="container header-inner">
+            <a href="dashboard.html" class="logo">
+                <div class="logo-icon">🛡️</div>
+                <span>SHE<span class="text-gradient">ild</span></span>
+            </a>
+            <div class="header-actions">
+                <a href="dashboard.html" class="btn btn-ghost btn-sm">← Dashboard</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-shell">
+        <div class="container">
+            <div class="page-title">
+                <h1>📍 Live Location</h1>
+                <p>Track and share your real-time location with emergency contacts.</p>
+            </div>
+
+            <!-- Live Tracking Status -->
+            <div class="glass-card-static live-tracking-card" id="tracking-card">
+                <div class="tracking-header">
+                    <div class="tracking-status" id="tracking-status">
+                        <span class="tracking-dot"></span>
+                        <span id="tracking-label">TRACKING ACTIVE</span>
+                    </div>
+                    <div class="tracking-timer" id="tracking-timer">00:00</div>
+                </div>
+
+                <!-- Map Container -->
+                <div class="map-container" id="map-container">
+                    <iframe id="map-frame" class="map-frame" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
+                        src="about:blank"></iframe>
+                    <div class="map-overlay" id="map-overlay">
+                        <div class="map-loading">
+                            <div class="spinner"></div>
+                            <span>Acquiring GPS signal...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coordinates Display -->
+                <div class="coords-display" id="coords-display">
+                    <div class="coord-item">
+                        <span class="coord-label">Latitude</span>
+                        <span class="coord-value" id="live-lat">—</span>
+                    </div>
+                    <div class="coord-item">
+                        <span class="coord-label">Longitude</span>
+                        <span class="coord-value" id="live-lng">—</span>
+                    </div>
+                    <div class="coord-item">
+                        <span class="coord-label">Accuracy</span>
+                        <span class="coord-value" id="live-accuracy">—</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Share Actions -->
+            <div class="section-title" style="margin-top: var(--space-xl);">
+                <h2>📤 Share Location</h2>
+            </div>
+
+            <div class="share-actions-grid">
+                <button class="glass-card share-action-card" onclick="shareLiveToWhatsApp()">
+                    <div class="share-icon" style="background: rgba(37,211,102,0.15); color: #25D366;">💬</div>
+                    <h3>WhatsApp</h3>
+                    <p>Send to all contacts</p>
+                </button>
+
+                <button class="glass-card share-action-card" onclick="shareLiveToSMS()">
+                    <div class="share-icon" style="background: rgba(59,130,246,0.15); color: #3B82F6;">📱</div>
+                    <h3>SMS</h3>
+                    <p>Text all contacts</p>
+                </button>
+
+                <button class="glass-card share-action-card" onclick="copyLocationToClipboard()">
+                    <div class="share-icon" style="background: rgba(245,158,11,0.15); color: #F59E0B;">📋</div>
+                    <h3>Copy Link</h3>
+                    <p>Copy to clipboard</p>
+                </button>
+
+                <button class="glass-card share-action-card" onclick="shareLocationNative()">
+                    <div class="share-icon" style="background: rgba(124,58,237,0.15); color: #7C3AED;">📤</div>
+                    <h3>Share</h3>
+                    <p>Other apps</p>
+                </button>
+            </div>
+
+            <!-- Controls -->
+            <div style="text-align: center; margin-top: var(--space-xl); padding-bottom: var(--space-2xl);">
+                <button class="btn btn-danger btn-lg" id="tracking-toggle-btn" onclick="toggleLiveTracking()">
+                    ⏹ Stop Tracking
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
